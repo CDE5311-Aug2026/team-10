@@ -2,6 +2,9 @@
 
 A locally runnable mobile-first SIP:O onboarding prototype built with React, TypeScript, and Vite. The signup and sign-in options are available in a single scrollable app screen.
 
+## this is a working prototype (work in progress)
+[https://team-10-seven.vercel.app/]([url](https://team-10-seven.vercel.app/))
+
 ## Run locally
 
 ```bash
