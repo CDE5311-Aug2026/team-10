@@ -1,0 +1,474 @@
+{
+  "flows": [
+    {
+      "nodeId": "131:1295",
+      "name": "Flow 1"
+    }
+  ],
+  "frames": [
+    {
+      "id": "131:1030",
+      "name": "Home setting-1",
+      "width": 402,
+      "height": 874
+    },
+    {
+      "id": "200:3516",
+      "name": "Home- Data- week",
+      "width": 402,
+      "height": 1022
+    },
+    {
+      "id": "200:3601",
+      "name": "Home- Data - Month",
+      "width": 402,
+      "height": 1022
+    },
+    {
+      "id": "35:189",
+      "name": "Gallery-1",
+      "width": 402,
+      "height": 1672
+    },
+    {
+      "id": "211:2116",
+      "name": "Gallery-1",
+      "width": 402,
+      "height": 1672
+    },
+    {
+      "id": "73:196",
+      "name": "Gallery1-1",
+      "width": 402,
+      "height": 1672
+    },
+    {
+      "id": "87:218",
+      "name": "Chat",
+      "width": 402,
+      "height": 865
+    },
+    {
+      "id": "182:5778",
+      "name": "Chat-1",
+      "width": 402,
+      "height": 1034
+    },
+    {
+      "id": "28:672",
+      "name": "setting-1",
+      "width": 402,
+      "height": 1616
+    },
+    {
+      "id": "131:1295",
+      "name": "Home-1",
+      "width": 402,
+      "height": 1366
+    },
+    {
+      "id": "178:3710",
+      "name": "Home-1- Recommendation",
+      "width": 402,
+      "height": 1163
+    },
+    {
+      "id": "164:1801",
+      "name": "Home-1-setting-1",
+      "width": 402,
+      "height": 1312
+    },
+    {
+      "id": "175:2579",
+      "name": "Home-1",
+      "width": 402,
+      "height": 1312
+    },
+    {
+      "id": "175:2351",
+      "name": "Home-1",
+      "width": 402,
+      "height": 1312
+    },
+    {
+      "id": "173:980",
+      "name": "Home-1",
+      "width": 402,
+      "height": 1312
+    },
+    {
+      "id": "151:654",
+      "name": "Home-1-1 Reminder -Time",
+      "width": 402,
+      "height": 876
+    },
+    {
+      "id": "151:902",
+      "name": "Home-1-2 Reminder-food1",
+      "width": 402,
+      "height": 876
+    },
+    {
+      "id": "175:1219",
+      "name": "Home-1-2 Reminder-food- selection 2",
+      "width": 402,
+      "height": 876
+    },
+    {
+      "id": "175:1152",
+      "name": "Home-1-2 Reminder-food- selection 1",
+      "width": 402,
+      "height": 876
+    },
+    {
+      "id": "151:1122",
+      "name": "Home-1-2 Reminder-food 2",
+      "width": 402,
+      "height": 876
+    },
+    {
+      "id": "175:1286",
+      "name": "Home-1-1 Reminder-food 2 -selection 1",
+      "width": 402,
+      "height": 876
+    },
+    {
+      "id": "175:1355",
+      "name": "Home-1-2 Reminder-food 2- selection 2",
+      "width": 402,
+      "height": 876
+    },
+    {
+      "id": "175:1424",
+      "name": "Home-1-2 Reminder-water",
+      "width": 402,
+      "height": 876
+    },
+    {
+      "id": "175:2693",
+      "name": "Home-1-3 Today-Just Me + Social- Home",
+      "width": 402,
+      "height": 1191
+    },
+    {
+      "id": "178:3399",
+      "name": "Home-1-3 Today-Just Me + Social- Home",
+      "width": 402,
+      "height": 1191
+    },
+    {
+      "id": "73:363",
+      "name": "Home-Scan Drink",
+      "width": 402,
+      "height": 881
+    },
+    {
+      "id": "114:556",
+      "name": "Home-Scan Menu",
+      "width": 402,
+      "height": 880
+    },
+    {
+      "id": "58:452",
+      "name": "logo",
+      "width": 4146,
+      "height": 2419
+    }
+  ],
+  "links": [
+    {
+      "id": "182:5049",
+      "name": "back",
+      "root": "131:1030",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "200:3536",
+      "name": "back",
+      "root": "200:3516",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "201:3803",
+      "name": "Location Tap",
+      "root": "200:3516",
+      "to": "200:3601",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "200:3605",
+      "name": "back",
+      "root": "200:3601",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "53:199",
+      "name": "card-2",
+      "root": "35:189",
+      "to": "211:2116",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "56:299",
+      "name": "AI Chat Box",
+      "root": "35:189",
+      "to": "87:218",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "200:3477",
+      "name": "Home- Daily Overview",
+      "root": "131:1295",
+      "to": "200:3516",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I201:4348;201:4153",
+      "name": "Home- Reminder-eat",
+      "root": "131:1295",
+      "to": "151:902",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I201:4348;201:4163",
+      "name": "Home- Reminder-water",
+      "root": "131:1295",
+      "to": "175:1424",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I135:1610;135:1594",
+      "name": "Situation- Just Me",
+      "root": "131:1295",
+      "to": "164:1801",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I190:5929;190:5924",
+      "name": "Component 6",
+      "root": "131:1295",
+      "to": "131:1030",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I145:734;131:837",
+      "name": "Gallery",
+      "root": "131:1295",
+      "to": "35:189",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I145:734;131:914",
+      "name": "Setting",
+      "root": "131:1295",
+      "to": "28:672",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I145:734;199:2023",
+      "name": "Frame 16",
+      "root": "131:1295",
+      "to": "73:363",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I164:1806;135:1601",
+      "name": "Rectangle 56",
+      "root": "164:1801",
+      "to": "173:980",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I164:1806;135:1603",
+      "name": "Situation- Work",
+      "root": "164:1801",
+      "to": "175:2351",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I164:1806;135:1606",
+      "name": "Situatiobn- Social ",
+      "root": "164:1801",
+      "to": "175:2579",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I175:2584;135:1601",
+      "name": "Rectangle 56",
+      "root": "175:2579",
+      "to": "173:980",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I175:2356;135:1601",
+      "name": "Rectangle 56",
+      "root": "175:2351",
+      "to": "173:980",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I173:985;135:1592",
+      "name": "Button- Next",
+      "root": "173:980",
+      "to": "175:2693",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "182:5041",
+      "name": "back",
+      "root": "151:654",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I151:1098;151:1009",
+      "name": "Ellipse 23",
+      "root": "151:902",
+      "to": "175:1219",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I151:1098;151:1067;151:1007",
+      "name": "Ellipse 22",
+      "root": "151:902",
+      "to": "175:1152",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I151:1098;151:953",
+      "name": "Situatiobn- Social ",
+      "root": "151:902",
+      "to": "151:1122",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "182:5045",
+      "name": "back",
+      "root": "151:902",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I175:1224;151:953",
+      "name": "Situatiobn- Social ",
+      "root": "175:1219",
+      "to": "175:1286",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "182:5065",
+      "name": "back",
+      "root": "175:1219",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "I175:1157;151:1009",
+      "name": "Ellipse 23",
+      "root": "175:1152",
+      "to": "175:1219",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "182:5061",
+      "name": "back",
+      "root": "175:1152",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "175:1143",
+      "name": "Ellipse 22",
+      "root": "151:1122",
+      "to": "175:1323",
+      "navigation": "SCROLL_TO"
+    },
+    {
+      "id": "182:5053",
+      "name": "back",
+      "root": "151:1122",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "175:1297",
+      "name": "Ellipse 23",
+      "root": "175:1286",
+      "to": "175:1355",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "182:5069",
+      "name": "back",
+      "root": "175:1286",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "175:1362",
+      "name": "Button- Next",
+      "root": "175:1355",
+      "to": "178:3710",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "182:5073",
+      "name": "back",
+      "root": "175:1355",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "182:5057",
+      "name": "back",
+      "root": "175:1424",
+      "to": "131:1295",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "178:3390",
+      "name": "Situatiobn- Social ",
+      "root": "175:2693",
+      "to": "178:3399",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "182:5077",
+      "name": "back",
+      "root": "175:2693",
+      "to": "173:980",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "178:3707",
+      "name": "Button- Next",
+      "root": "178:3399",
+      "to": "114:556",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "182:5081",
+      "name": "back",
+      "root": "178:3399",
+      "to": "173:980",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "126:755",
+      "name": "Location Tap",
+      "root": "73:363",
+      "to": "114:556",
+      "navigation": "NAVIGATE"
+    },
+    {
+      "id": "126:762",
+      "name": "Location Tap",
+      "root": "114:556",
+      "to": "73:363",
+      "navigation": "NAVIGATE"
+    }
+  ]
+}
