@@ -1,6 +1,7 @@
 import React,{useState,useEffect,useRef,useCallback} from 'react';
 import {createRoot} from 'react-dom/client';
-import {ArrowUp,Image,Mic,ArrowLeft} from 'lucide-react';
+import {createPortal} from 'react-dom';
+import {ArrowUp,Image,Mic,X} from 'lucide-react';
 import {DesignContext,type Binding,type NodeProps} from './design-runtime';
 import {screens} from './screens';
 import prototype from './prototype.json';
@@ -15,6 +16,17 @@ import './styles.css';
 const HOME='131:1295';
 const homeStates=[HOME,'164:1801','173:980','175:2351','175:2579','178:3710'];
 const foodStates=['151:902','175:1152','175:1219','151:1122','175:1286','175:1355'];
+const galleryRecipes:Record<string,{name:string;date:string;insight:string;ingredients:[string,string][];estimate:string}>={
+ 'card-1':{name:'Negroni',date:'Oct 07',insight:'Bitter orange and herbal notes meet a rich, spirit-forward finish. Equal parts gin, bitter aperitif and vermouth.',ingredients:[['Gin','30 ml'],['Campari','30 ml'],['Sweet vermouth','30 ml'],['Orange peel','1 piece'],['Ice','1 large cube']],estimate:'180 kcal · 24% ABV · 12 g sugar'},
+ 'card-2':{name:'French 75',date:'Oct 06',insight:'A light, refreshing cocktail with a sparkling finish. Despite its delicate taste, the French 75 contains alcohol from both gin and champagne. Sip mindfully and enjoy at your own pace.',ingredients:[['Gin','30 ml'],['Champagne','60 ml'],['Fresh lemon juice','15 ml'],['Simple syrup','15 ml'],['Lemon twist','1 piece']],estimate:'140 kcal · 18% ABV · 8 g sugar'},
+ 'card-3':{name:'Gin & Tonic',date:'Oct 04',insight:'Crisp botanicals and tonic bitterness, finished with fresh lime. Tonic sweetness varies by brand.',ingredients:[['Gin','45 ml'],['Tonic water','120 ml'],['Lime wedge','1 piece'],['Ice','As needed']],estimate:'120 kcal · 12% ABV · 6 g sugar'},
+ 'card-4':{name:'Whiskey Sour',date:'Oct 05',insight:'Whiskey warmth balanced with bright lemon and sweetness. Optional egg white adds a soft foam.',ingredients:[['Whiskey','60 ml'],['Lemon juice','22.5 ml'],['Simple syrup','15 ml'],['Egg white (opt.)','15 ml'],['Cherry','1 piece']],estimate:'160 kcal · 22% ABV · 15 g sugar'},
+ 'card-5':{name:'Vodka Martini',date:'Sep 28',insight:'Clean and dry with a subtle vermouth aroma. An olive adds a savory finish to this spirit-forward classic.',ingredients:[['Vodka','60 ml'],['Dry vermouth','10 ml'],['Olive','1 piece'],['Ice for stirring','As needed']],estimate:'110 kcal · 25% ABV · 2 g sugar'},
+ 'card-6':{name:'Mojito',date:'Sep 25',insight:'Fresh mint and lime brighten white rum. Soda adds a sparkling finish, with syrup balancing the citrus.',ingredients:[['White rum','45 ml'],['Lime juice','25 ml'],['Simple syrup','15 ml'],['Mint','6 leaves'],['Soda water','60 ml']],estimate:'150 kcal · 10% ABV · 10 g sugar'},
+ 'card-7':{name:'Old Fashioned',date:'Sep 20',insight:'Rich whiskey with aromatic bitters and orange oils. A small amount of syrup softens the bold finish.',ingredients:[['Bourbon','60 ml'],['Simple syrup','5 ml'],['Angostura bitters','2 dashes'],['Orange peel','1 piece'],['Ice','1 cube']],estimate:'170 kcal · 30% ABV · 5 g sugar'},
+ 'card-8':{name:'Cosmopolitan',date:'Sep 18',insight:'Bright cranberry and lime with orange notes. A tart, lightly sweet cocktail served chilled in a martini glass.',ingredients:[['Vodka','45 ml'],['Cranberry juice','30 ml'],['Lime juice','15 ml'],['Triple sec','15 ml']],estimate:'140 kcal · 20% ABV · 12 g sugar'},
+};
+function GalleryRecipeFace({recipe}:{recipe:typeof galleryRecipes[string]}){return <div className="gallery-recipe-face"><div className="gallery-recipe-heading"><strong>{recipe.name}</strong><span>{recipe.date}</span></div><section className="gallery-recipe-insight"><b>AI Insight:</b><p>{recipe.insight}</p></section><section className="gallery-recipe-ingredients"><b>Ingredients</b>{recipe.ingredients.map(([name,amount])=><div key={name}><span>{name}</span><span>{amount}</span></div>)}</section><div className="gallery-recipe-estimate"><span>Estimates per serving</span><span>{recipe.estimate}</span></div></div>}
 const textOf=(c:any):string=>typeof c==='string'?c.trim():typeof c==='number'?String(c):Array.isArray(c)?c.map(textOf).join(' '):React.isValidElement<{children?:React.ReactNode}>(c)?textOf(c.props.children):'';
 const fieldDefinitions:Record<string,{key:string;placeholder:string;options?:string[];type?:string}>={
  '48:339':{key:'frequency',placeholder:'Select frequency',options:['Rarely','Monthly','Weekly','Several times a week','Daily']},
@@ -38,15 +50,17 @@ const fieldDefinitions:Record<string,{key:string;placeholder:string;options?:str
 type ChatMessage={role:'user'|'assistant';text:string};
 type Timer={remaining:number;endsAt:number|null};
 function App(){
- const readRoute=()=>{const id=decodeURIComponent(location.hash.slice(1));return screens[id]?id:HOME};
+ const normalizeRoute=(id:string)=>['211:2116','73:196'].includes(id)?'35:189':id;
+ const readRoute=()=>{const id=normalizeRoute(decodeURIComponent(location.hash.slice(1)));return screens[id]?id:HOME};
  const [header,setHeader]=useState<HTMLDivElement|null>(null);const [screen,setScreen]=useState(readRoute);const [footer,setFooter]=useState<HTMLDivElement|null>(null);const [scale,setScale]=useState(1);const [toast,setToast]=useState('');
  const [prefs,setPrefs]=useStored<Record<string,string>>('preferences',{});const [favorites,setFavorites]=useStored<string[]>('favorites',[]);const [drinks,setDrinks]=useStored<Drink[]>('drinks',[]);const [plan,setPlan]=useStored('plan',{who:'',occasion:''});const [selectedDrink,setSelectedDrink]=useStored('selected-drink','');const [selectedFood,setSelectedFood]=useStored('selected-food','');
+ const [flippedCard,setFlippedCard]=useState<string|null>(null);
  const [time,setTime]=useStored<Timer>('pace-timer',{remaining:1200,endsAt:null});const [waterTime,setWaterTime]=useStored<Timer>('water-timer',{remaining:1800,endsAt:null});const [water,setWater]=useStored('water-amount',125);const [waterTotal,setWaterTotal]=useStored('water-total',0);
  const [interval,setIntervalValue]=useStored('check-in-interval','30 minutes');const [lastDrink,setLastDrink]=useState('');const [waterGoal,setWaterGoal]=useState('');
  const [chat,setChat]=useStored<ChatMessage[]>('chat',[]);const [chatInput,setChatInput]=useState('');const [photo,setPhoto]=useState('');const [chatAttachment,setChatAttachment]=useState('');
  const shell=useRef<HTMLDivElement>(null);const scroller=useRef<HTMLDivElement>(null);const uploadRef=useRef<HTMLInputElement>(null);const toastTimer=useRef<ReturnType<typeof setTimeout>|null>(null);
  const notify=useCallback((t:string)=>{setToast(t);if(toastTimer.current)clearTimeout(toastTimer.current);toastTimer.current=setTimeout(()=>setToast(''),3500)},[]);
- const navigate=useCallback((id:string,preserveScroll=false)=>{if(!screens[id])return;setScreen(id);history.pushState(null,'','#'+encodeURIComponent(id));if(!preserveScroll)scroller.current?.scrollTo({top:0});},[]);
+ const navigate=useCallback((requestedId:string,preserveScroll=false)=>{const id=normalizeRoute(requestedId);if(!screens[id])return;setScreen(id);history.pushState(null,'','#'+encodeURIComponent(id));if(!preserveScroll)scroller.current?.scrollTo({top:0});},[]);
  useEffect(()=>{const fn=()=>{setScreen(readRoute());scroller.current?.scrollTo({top:0})};window.addEventListener('popstate',fn);return()=>window.removeEventListener('popstate',fn)},[]);
  useEffect(()=>{if(!shell.current)return;const ro=new ResizeObserver(([e])=>setScale(Math.min(1,e.contentRect.width/402)));ro.observe(shell.current);return()=>ro.disconnect()},[]);
  useEffect(()=>{document.title='SIP:O · '+screens[screen].name;},[screen]);
@@ -145,8 +159,8 @@ function App(){
   if(['35:189','211:2116','73:196'].includes(screen)){
    if(name==='Favorite heart'){const card=id.split(';').at(-1)||id;b.action=()=>toggleFavorite(card);b.selected=favorites.includes(card);b.label='Toggle favourite';}
    if(name==='AI Chat Box'&&!b.action)b.action=()=>navigate('87:218');
-   if(name==='card-2'&&screen==='211:2116'){b.action=()=>navigate('35:189')}
-   if(name==='header')b.action=()=>navigate(screen==='73:196'?'35:189':'73:196');
+   if(screen==='35:189'&&galleryRecipes[name]){const recipe=galleryRecipes[name];b.flipContent=<GalleryRecipeFace recipe={recipe}/>;b.flipped=flippedCard===name;b.label=`${recipe.name}: ${b.flipped?'show photo':'show recipe details'}`;b.action=()=>setFlippedCard(current=>current===name?null:name);}
+   if(name==='header')b.action=undefined;
    if(name==='gallery-grid'&&drinks.length)b.extra=<div className="logged-drinks"><h2>Your logged drinks</h2>{drinks.map((d,i)=><article key={d.time+i}><img src={d.image.startsWith('data:')?d.image:'/assets/'+d.image} alt={d.name}/><div><b>{d.name}</b><p>{new Date(d.time).toLocaleDateString()} · {d.calories} kcal · {d.abv}% ABV · {d.sugar}g sugar</p><button onClick={()=>setDrinks(old=>old.filter((_,index)=>index!==i))}>Remove</button></div></article>)}</div>;
   }
   if(screen==='87:218'){
@@ -173,7 +187,8 @@ function App(){
  return <div className="app-viewport" ref={shell}>
   <DesignContext.Provider value={{bind,footer,header,send,upload:()=>uploadRef.current?.click(),mic,water,setWater}}>
    <div ref={setHeader} className="header-host" style={{height:headerHeight,zoom:scale}}/>
-   <div className="screen-scroll" ref={scroller} style={{top:headerHeight*scale}}><div className="canvas-size" style={{width:402,height:current.height+(drinks.length&&['35:189','211:2116'].includes(screen)?drinks.length*115+60:0),zoom:scale,marginTop:-headerHeight}} key={screen}><Screen/>{screen==='87:218'&&<button className="chat-back" aria-label="Back to Gallery" onClick={()=>navigate('35:189')}><ArrowLeft size={18}/></button>}</div></div>
+   {screen==='87:218'&&header&&createPortal(<button className="chat-back" aria-label="Close chat and return Home" onClick={()=>navigate('131:1295')}><X size={18}/></button>,header)}
+   <div className="screen-scroll" ref={scroller} style={{top:headerHeight*scale}}><div className="canvas-size" style={{width:402,height:current.height+(drinks.length&&['35:189','211:2116'].includes(screen)?drinks.length*115+60:0),zoom:scale,marginTop:-headerHeight}} key={screen}><Screen/></div></div>
    <div ref={setFooter} className="nav-host" style={{zoom:scale}}/>
    <input ref={uploadRef} hidden type="file" accept="image/*" capture="environment" onChange={e=>{const file=e.target.files?.[0];if(!file)return;if(file.size>8*1024*1024){notify('Choose an image smaller than 8 MB.');return}const reader=new FileReader();reader.onload=()=>{if(screen==='87:218'||['35:189','211:2116'].includes(screen)){setChatAttachment(String(reader.result));navigate('87:218')}else setPhoto(String(reader.result))};reader.readAsDataURL(file);e.target.value=''}}/>
   </DesignContext.Provider>
