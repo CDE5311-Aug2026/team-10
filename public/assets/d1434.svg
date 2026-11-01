@@ -1,0 +1,13 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Personalise preferences">
+<circle id="Ellipse 21" cx="17.5" cy="17.5" r="17.5" fill="white" fill-opacity="0.1"/>
+<g id="Sliders" clip-path="url(#clip0_0_92)">
+<path id="Icon" d="M11.6667 24.0625V18.9583M11.6667 18.9583H9.47917M11.6667 18.9583H13.8542M11.6667 16.0417V10.9375M17.5 24.0625V17.5M17.5 14.5833V10.9375M17.5 14.5833L15.3125 14.5833M17.5 14.5833L19.6875 14.5833M23.3333 24.0625V20.4167M23.3333 20.4167H21.1458M23.3333 20.4167H25.5208M23.3333 17.5V10.9375" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke="#E58900"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_0_92">
+<rect width="17.5" height="17.5" fill="white" transform="translate(8.75 8.75)"/>
+</clipPath>
+</defs>
+</svg>
