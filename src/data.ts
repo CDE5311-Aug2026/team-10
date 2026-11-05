@@ -5,4 +5,12 @@ export const foods={before:[{name:'Balanced Meal',description:'Rice, chicken and
 export const profileOptions:Record<string,string[]>={Medication:['None','Taking medication','Prefer not to say'],'Menstrual period':['Currently on my period','Not on my period','Not applicable','Prefer not to say'],'Weight goal':['Maintain weight','Lose weight','Gain weight','No weight goal'],Flavour:['Citrusy & fresh','Fruity & sweet','Bitter & dry','No preference'],'Alcohol awareness':['I have a sense of my limits','Still figuring it out',"I’m not sure yet",'Prefer not to say'],Gender:['Woman','Man','Non-binary','Prefer not to say']};
 export function weekStart(){const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()-((d.getDay()+6)%7));return d;}
 export function sampleDrinks():Drink[]{const start=weekStart();const date=(day:number,hour:number,min=0)=>{const d=new Date(start);d.setDate(d.getDate()+day);d.setHours(hour,min);return d.toISOString()};return [{id:'sample-lager',name:'Lager',abv:5,kcal:125,sugar:1,volume:330,image:'f195d.png',date:date(4,19),food:'Rice, chicken & vegetables',source:'Sample history'},{id:'sample-wine',name:'Red wine',abv:13,kcal:128,sugar:1,volume:150,image:'368b2.png',date:date(5,19),food:'Avocado & egg toast',source:'Sample history'},{id:'sample-gin',name:'Gin & tonic',abv:5,kcal:96,sugar:9,volume:200,image:'9db61.png',date:date(5,19,40),food:'Avocado & egg toast',source:'Sample history'}];}
-export const memories=[{name:'Negroni',image:'368b2.png',kcal:180,abv:24,sugar:12,volume:100},{name:'French 75',image:'43981.png',kcal:140,abv:13,sugar:10,volume:120},{name:'Whiskey Sour',image:'a9220.png',kcal:160,abv:22,sugar:15,volume:100},{name:'Gin & tonic',image:'9db61.png',kcal:160,abv:8,sugar:12,volume:200}];
+export const memories=[
+{name:'Negroni',image:'368b2.png',kcal:180,abv:24,sugar:12,volume:100,date:'2025-10-07'},
+{name:'French 75',image:'43981.png',kcal:140,abv:18,sugar:8,volume:120,date:'2025-10-06'},
+{name:'Whiskey Sour',image:'a9220.png',kcal:160,abv:22,sugar:15,volume:100,date:'2025-10-05'},
+{name:'Gin & Tonic',image:'9db61.png',kcal:120,abv:12,sugar:6,volume:200,date:'2025-10-04'},
+{name:'Vodka Martini',image:'vodka-martini.png',kcal:110,abv:25,sugar:2,volume:100,date:'2025-09-28'},
+{name:'Mojito',image:'mojito.png',kcal:150,abv:10,sugar:10,volume:200,date:'2025-09-25'},
+{name:'Old Fashioned',image:'old-fashioned.png',kcal:170,abv:30,sugar:5,volume:100,date:'2025-09-20'},
+{name:'Cosmopolitan',image:'cosmopolitan.png',kcal:140,abv:20,sugar:12,volume:120,date:'2025-09-18'}];
