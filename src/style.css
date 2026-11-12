@@ -113,3 +113,9 @@ main.home>h1:first-child{font-weight:400}
  .onboarding.splash{min-height:calc(100dvh - 80px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px))}
  .toast{bottom:calc(100px + env(safe-area-inset-bottom,0px))}
 }
+
+/* Match Safari's top safe area to the page header. */
+@media (max-width:600px), (hover:none) and (pointer:coarse){
+ :root,html,body,#root{background-color:#c9d280;color-scheme:light}
+ header{background:#c9d280}
+}
